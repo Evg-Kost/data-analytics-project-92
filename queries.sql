@@ -70,8 +70,8 @@ order by age_category;
 --уникальные покупатели и выручка по месяцам
 select
 	to_char(sale_date, 'yyyy-mm') as selling_month,
-	count(distinct customer_id),
-	floor(sum(quantity * price))
+	count(distinct customer_id) as total_customers,
+	floor(sum(quantity * price)) as income
 from sales
 inner join products on
 	sales.product_id = products.product_id
