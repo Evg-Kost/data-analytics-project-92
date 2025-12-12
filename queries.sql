@@ -2,7 +2,7 @@ select COUNT(customer_id) as customers_count from customers; --подсчет п
 --топ 10 продавцов по выручке
 select 
 	e.first_name || ' ' || e.last_name as seller,
-	COUNT(*) as operation,
+	COUNT(*) as operations,
 	floor(SUM(s.quantity * p.price)) as income
 from employees e
 inner join sales s on
