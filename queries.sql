@@ -34,9 +34,9 @@ where average_income < avg_average_income
 ;
 
 --продажи продавцов по дням недели
-select 
+
 	e.first_name || ' ' || e.last_name as seller,
-	TO_CHAR(s.sale_date, 'day') as day_of_week,
+	TRIM(TO_CHAR(s.sale_date, 'day')) as day_of_week,
 	floor(SUM(p.price * s.quantity)) as income
 from employees e
 inner join sales s on
@@ -44,7 +44,7 @@ inner join sales s on
 inner join products p on
 	s.product_id = p.product_id 
 group by e.employee_id, seller, day_of_week, EXTRACT(ISODOW from s.sale_date)
-order by seller, EXTRACT(ISODOW from s.sale_date);
+order by EXTRACT(ISODOW from s.sale_date), seller;
 
 --разбиение покупателей на группы по возрастам
 SELECT 
